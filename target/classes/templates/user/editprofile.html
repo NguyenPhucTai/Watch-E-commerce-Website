@@ -1,0 +1,181 @@
+<!doctype html>
+<html class="no-js" xmlns:th="http://www.thymeleaf.org" lang="en" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>USER - Edit User Profile</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/img/favicon.ico}">
+
+    <!-- CSS here -->
+        <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+        <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
+        <link rel="stylesheet" th:href="@{/css/flaticon.css}">
+        <link rel="stylesheet" th:href="@{/css/slicknav.css}">
+        <link rel="stylesheet" th:href="@{/css/animate.min.css}">
+        <link rel="stylesheet" th:href="@{/css/magnific-popup.css}">
+        <link rel="stylesheet" th:href="@{/css/fontawesome-all.min.css}">
+        <link rel="stylesheet" th:href="@{/css/themify-icons.css}">
+        <link rel="stylesheet" th:href="@{/css/slick.css}">
+        <link rel="stylesheet" th:href="@{/css/nice-select.css}">
+        <link rel="stylesheet" th:href="@{/css/style.css}">
+        <link rel="stylesheet" th:href="@{/css/profilesheet.css}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+
+    
+    <!-- Header-->
+    <header>
+		<thblock th:include="_navigation"></thblock>
+    </header>
+	<!-- Header End -->
+	
+	<!-- Body Begin -->
+   <div class="background">
+        <div class="container emp-profile">
+            <div class="row">
+            
+                <div class="col-md-4">
+                    <div class="profile-img">
+					    <form action="uploadSuccess.html" th:action="@{/fileUpload}" method="post" enctype="multipart/form-data">
+	                        <img src="https://secure.gravatar.com/avatar/7e1f9482a4d0ce12eacf860702416842?s=160&d=mm&r=g" alt=""/>
+					    	<div class="file btn btn-primary">
+                            	Change Photo
+                            <input type="file" name="file"/>
+                        </div>
+					    </form>
+                    </div>
+                </div>
+                
+                
+                <div class="col-md-6">
+                    <div class="profile-head">
+                        <h1><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit information</h1>
+                        <h3>User: <span th:utext="${account.username}"></span></h3>
+                        <span class="pencil-square-o"></span>
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="home-tab" data-toggle="tab" role="tab" aria-controls="home" aria-selected="true">About</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <a type="button" th:href="@{profile(name=${account.fullName})}" class="btn btn-primary">Back</a>
+                   
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="offset-md-3 col-md-8">
+                    <div class="tab-content profile-tab" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+							
+							
+							<form th:action="@{/editprofile}" th:object="${editProfileForm}" method="POST" >
+
+									<div th:classappend="${#fields.hasErrors('fullName')} ? has-error : ''">                           
+									<span th:if="${#fields.hasErrors('fullName')}" class="form-group row offset-md-4 col-md-6 justify-content-center  alert alert-danger"  th:errors="*{fullName}" ></span>							
+			                            <div class="form-group row">
+			                                <label class="col-md-4 col-form-label text-md-right">Fullname</label>
+			                                <div class="col-md-6">
+			                                    <input type="text" class="form-control" th:field="*{fullName}" >
+			                                </div>
+			                            </div>
+		                            </div>
+		
+									<div th:classappend="${#fields.hasErrors('email')} ? has-error : ''">                           
+									<span th:if="${#fields.hasErrors('email')}" class="form-group row offset-md-4 col-md-6 justify-content-center  alert alert-danger"  th:errors="*{email}" ></span>									
+			                            <div class="form-group row">
+			                                <label class="col-md-4 col-form-label text-md-right">Email</label>
+			                                <div class="col-md-6">
+			                                    <input type="text" class="form-control" th:field="*{email}">
+			                                </div>
+			                            </div>
+		                            </div>
+		
+									<div th:classappend="${#fields.hasErrors('phoneNumber')} ? has-error : ''">                           
+									<span th:if="${#fields.hasErrors('phoneNumber')}" class="form-group row offset-md-4 col-md-6 justify-content-center  alert alert-danger"  th:errors="*{phoneNumber}" ></span>									
+			                            <div class="form-group row">
+			                                <label class="col-md-4 col-form-label text-md-right">Phone Number</label>
+			                                <div class="col-md-6">
+			                                    <input type="text" class="form-control" th:field="*{phoneNumber}">
+			                                </div>
+			                            </div>
+		                            </div>
+		
+		
+									<div th:classappend="${#fields.hasErrors('address')} ? has-error : ''">                           
+									<span th:if="${#fields.hasErrors('address')}" class="form-group row offset-md-4 col-md-6 justify-content-center  alert alert-danger"  th:errors="*{address}" ></span> 									
+			                            <div class="form-group row">
+			                                <label class="col-md-4 col-form-label text-md-right">Address</label>
+			                                <div class="col-md-6">
+			                                    <textarea type="text" class="form-control"  style="height:80px; overflow-y: scroll; resize: none;" th:field="*{address}"></textarea>
+			                                </div>
+			                            </div>
+		                            </div>
+		                         
+		                            
+									<div class="col-md-8 offset-md-4">
+		                                <input id="input" type="submit" class="btn btn-sucess" value="Edit"/>
+		                            </div>
+							</form>
+                            
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>     
+    	</div>
+    </div>	
+	<!-- Body End -->
+	
+	<!-- Footer -->
+    <footer>
+		<thblock th:include="_footer"></thblock>
+    </footer>
+    <!-- Footer End -->
+
+    <!--? Search model Begin -->
+		<thblock th:include="_searchbar"></thblock>
+    <!-- Search model end -->
+</body>
+
+<!-- JS here -->
+
+    <script th:src="@{/js/vendor/modernizr-3.5.0.min.js}"></script>
+    <!-- Jquery, Popper, Bootstrap -->
+    <script th:src="@{/js/vendor/jquery-1.12.4.min.js}"></script>
+    <script th:src="@{/js/popper.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <!-- Jquery Mobile Menu -->
+    <script th:src="@{/js/jquery.slicknav.min.js}"></script>
+
+    <!-- Jquery Slick , Owl-Carousel Plugins -->
+    <script th:src="@{/js/owl.carousel.min.js}"></script>
+    <script th:src="@{/js/slick.min.js}"></script>
+
+    <!-- One Page, Animated-HeadLin -->
+    <script th:src="@{/js/wow.min.js}"></script>
+    <script th:src="@{/js/animated.headline.js}"></script>
+    
+    <!-- Scroll up, nice-select, sticky -->
+    <script th:src="@{/js/jquery.scrollUp.min.js}"></script>
+    <script th:src="@{/js/jquery.nice-select.min.js}"></script>
+    <script th:src="@{/js/jquery.sticky.js}"></script>
+    <script th:src="@{/js/jquery.magnific-popup.js}"></script>
+
+    <!-- contact js -->
+    <script th:src="@{/js/contact.js}"></script>
+    <script th:src="@{/js/jquery.form.js}"></script>
+    <script th:src="@{/js/jquery.validate.min.js}"></script>
+    <script th:src="@{/js/mail-script.js}"></script>
+    <script th:src="@{/js/jquery.ajaxchimp.min.js}"></script>
+    
+    <!-- Jquery Plugins, main Jquery -->	
+    <script th:src="@{/js/plugins.js}"></script>
+    <script th:src="@{/js/main.js}"></script>
+</html>

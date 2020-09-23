@@ -1,0 +1,12 @@
+.title{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.table{
+	margin-top:2%;
+	margin-left: auto;
+	
+}
+.categoryTable{width: 50%; margin-left: 30%;}

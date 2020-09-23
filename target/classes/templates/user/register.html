@@ -1,0 +1,185 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>REGISTER</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/img/favicon.ico}">
+
+    <!-- CSS here -->
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+        <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
+        <link rel="stylesheet" th:href="@{/css/flaticon.css}">
+        <link rel="stylesheet" th:href="@{/css/slicknav.css}">
+        <link rel="stylesheet" th:href="@{/css/animate.min.css}">
+        <link rel="stylesheet" th:href="@{/css/magnific-popup.css}">
+        <link rel="stylesheet" th:href="@{/css/fontawesome-all.min.css}">
+        <link rel="stylesheet" th:href="@{/css/themify-icons.css}">
+        <link rel="stylesheet" th:href="@{/css/slick.css}">
+        <link rel="stylesheet" th:href="@{/css/nice-select.css}">
+        <link rel="stylesheet" th:href="@{/css/style.css}">
+        <link rel="stylesheet" th:href="@{/css/RegisterViewSheet.css}">
+</head>
+<body>
+    
+
+    
+    <!-- Header-->
+    <header>
+		<thblock th:include="_navigation"></thblock>
+    </header>
+	<!-- Header End -->
+    
+    
+    <!-- Body Begin -->
+    <main>
+        <div class="background" id="RegisterForm">
+            <div class="container" >
+                <div class="register-form">
+                    <div class="main-div">
+                     
+    
+                        <div class="panel register-sec">
+                            <h2>Register</h2>
+                        </div>
+                        <form th:action="@{/register}" th:object="${registerForm}" method="POST">
+                   
+						<div th:classappend="${#fields.hasErrors('username')} ? has-error : ''">                           
+						<span th:if="${#fields.hasErrors('username')}" class="form-group row offset-md-4 col-md-6 justify-content-center  alert alert-danger"  th:errors="*{username}" ></span>                
+                        <div class="form-group row">
+                            <label for="username" class="col-md-4 col-form-label text-md-right">Username: </label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="username" th:field="*{username}"/>
+                            </div>                       
+                        </div>               
+						</div>
+                
+                
+                
+                
+		                <div th:classappend="${#fields.hasErrors('password')} ? has-error : ''">                           
+						<span th:if="${#fields.hasErrors('username')}" class="form-group row offset-md-4 col-md-6 justify-content-center  alert alert-danger"  th:errors="*{password}" ></span>  
+                        <div class="form-group row">
+                            <label for="password" class="col-md-4 col-form-label text-md-right">Password: </label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="password" th:field="*{password}"/>
+                            </div>
+                        </div>             
+						</div>
+    
+    
+    
+    
+                   		<div th:classappend="${#fields.hasErrors('fullName')} ? has-error : ''">                              
+						<span th:if="${#fields.hasErrors('username')}" class="form-group row offset-md-4 col-md-6 justify-content-center  alert alert-danger"  th:errors="*{fullName}" ></span>  
+                        <div class="form-group row">
+                            <label for="fullname" class="col-md-4 col-form-label text-md-right">Full Name: </label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="fullName" th:field="*{fullName}"/>
+                            </div>
+                        </div>
+						</div>
+    
+    
+    
+    
+                   		<div th:classappend="${#fields.hasErrors('email')} ? has-error : ''">                             
+						<span th:if="${#fields.hasErrors('email')}" class="form-group row offset-md-4 col-md-6 justify-content-center  alert alert-danger"  th:errors="*{email}" ></span>  
+                        <div class="form-group row">
+                            <label for="email" class="col-md-4 col-form-label text-md-right">Email: </label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="email" th:field="*{email}"/>
+                            </div>
+                        </div>
+						</div>
+    
+    
+                   		<div th:classappend="${#fields.hasErrors('phoneNumber')} ? has-error : ''">                            
+						<span th:if="${#fields.hasErrors('phoneNumber')}" class="form-group row offset-md-4 col-md-6 justify-content-center  alert alert-danger"  th:errors="*{phoneNumber}" ></span>  
+                        <div class="form-group row">
+                            <label for="phoneNumber" class="col-md-4 col-form-label text-md-right">Phone Nubmer: </label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="phoneNumber" th:field="*{phoneNumber}"/>
+                            </div>
+                        </div>
+						</div>
+    
+    
+    
+    
+                   		<div th:classappend="${#fields.hasErrors('address')} ? has-error : ''">                           
+						<span th:if="${#fields.hasErrors('address')}" class="form-group row offset-md-4 col-md-6 justify-content-center  alert alert-danger"  th:errors="*{address}" ></span>  
+                        <div class="form-group row">
+                            <label for="address" class="col-md-4 col-form-label text-md-right">Address: </label>
+                            <div class="col-md-6">
+                                <textarea type="text" id="address" class="form-control" name="address" th:field="*{address}"></textarea>
+                            </div>
+                        </div>
+						</div>	
+						
+    
+                        <div class="col-md-8 offset-md-2">
+                            <input type="submit" class="btn btn-primary" value="Register"/>   
+                            <a th:href="@{/login}" id="btntoLogin" class="btn btn-danger">Login Now</a>  
+                        </div>
+        
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Body End -->
+    
+    
+    <!-- Footer -->
+    <footer>
+		<thblock th:include="_footer"></thblock>
+    </footer>
+    <!-- Footer End -->
+
+    <!--? Search model Begin -->
+		<thblock th:include="_searchbar"></thblock>
+    <!-- Search model end -->
+    
+    <!-- JS here -->
+
+    <script th:src="@{/js/vendor/modernizr-3.5.0.min.js}"></script>
+    <!-- Jquery, Popper, Bootstrap -->
+    <script th:src="@{/js/vendor/jquery-1.12.4.min.js}"></script>
+    <script th:src="@{/js/popper.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <!-- Jquery Mobile Menu -->
+    <script th:src="@{/js/jquery.slicknav.min.js}"></script>
+
+    <!-- Jquery Slick , Owl-Carousel Plugins -->
+    <script th:src="@{/js/owl.carousel.min.js}"></script>
+    <script th:src="@{/js/slick.min.js}"></script>
+
+    <!-- One Page, Animated-HeadLin -->
+    <script th:src="@{/js/wow.min.js}"></script>
+    <script th:src="@{/js/animated.headline.js}"></script>
+    
+    <!-- Scroll up, nice-select, sticky -->
+    <script th:src="@{/js/jquery.scrollUp.min.js}"></script>
+    <script th:src="@{/js/jquery.nice-select.min.js}"></script>
+    <script th:src="@{/js/jquery.sticky.js}"></script>
+    <script th:src="@{/js/jquery.magnific-popup.js}"></script>
+
+    <!-- contact js -->
+    <script th:src="@{/js/contact.js}"></script>
+    <script th:src="@{/js/jquery.form.js}"></script>
+    <script th:src="@{/js/jquery.validate.min.js}"></script>
+    <script th:src="@{/js/mail-script.js}"></script>
+    <script th:src="@{/js/jquery.ajaxchimp.min.js}"></script>
+    
+    <!-- Jquery Plugins, main Jquery -->	
+    <script th:src="@{/js/plugins.js}"></script>
+    <script th:src="@{/js/main.js}"></script>
+
+</body>
+    
+</html>

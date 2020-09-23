@@ -1,0 +1,251 @@
+<!doctype html>
+<html class="no-js" xmlns:th="http://www.thymeleaf.org" lang="en" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>ADMIN - Homepage</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/img/favicon.ico}">
+
+    <!-- CSS here -->
+    	<link rel="stylesheet" th:href="@{/css/adminPageSheet.css}">
+        <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+        <link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
+        <link rel="stylesheet" th:href="@{/css/flaticon.css}">
+        <link rel="stylesheet" th:href="@{/css/slicknav.css}">
+        <link rel="stylesheet" th:href="@{/css/animate.min.css}">
+        <link rel="stylesheet" th:href="@{/css/magnific-popup.css}">
+        <link rel="stylesheet" th:href="@{/css/fontawesome-all.min.css}">
+        <link rel="stylesheet" th:href="@{/css/themify-icons.css}">
+        <link rel="stylesheet" th:href="@{/css/slick.css}">
+        <link rel="stylesheet" th:href="@{/css/nice-select.css}">
+        <link rel="stylesheet" th:href="@{/css/style.css}">
+        <link rel="stylesheet" th:href="@{/css/adminsheet.css}">
+</head>
+<body>
+    
+    <!-- Preloader Start -->
+		<thblock th:include="_preload"></thblock>
+	<!-- Preloader End -->
+    
+    <!-- Header-->
+    <header>
+		<thblock th:include="_navigation"></thblock>
+    </header>
+	<!-- Header End -->
+    
+	<div class="background">
+        <div class="container admin">
+            <div class="row">
+                <div class="col-md-12 admin-right">
+
+					<div class="title">
+						<h1>
+							This is <span th:utext="${account.username}"></span>
+						</h1>
+						<a class="btn btn-danger btn-xs" th:href="@{/logout}">logout</a>
+					</div>
+
+
+					<ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link" id="user-tab" data-toggle="tab" href="#user" role="tab" aria-controls="user" aria-selected="false">User</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="product-tab" data-toggle="tab" href="#product" role="tab" aria-controls="product" aria-selected="true">Product</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" id="product-tab" data-toggle="tab" href="#category" role="tab" aria-controls="category" aria-selected="false">Category</a>
+                        </li>
+                    </ul>
+                    
+                    <div class="tab-content" id="myTabContent">
+                    	<!-- Tag 1 -->
+                        <div class="tab-pane fade show" id="user" role="tabpanel" aria-labelledby="user-tab">
+                            <div class="heading">
+                            	<h3 class="admin-heading">User List</h3>
+                            	<div class="search-bar">
+                            		<form th:action="@{/admin}">
+       								<input type="text" name="userKey" id="userKey" size="50" th:value="${userKey}" required />
+								    &nbsp;
+								    <input type="submit" value="Search" />
+								    &nbsp;
+ 									<input type="button" value="Clear" id="btnClear" onclick="window.location.href='/admin'" />                   	
+                            		</form>
+                            	</div>
+                            </div>
+							<div class="row admin-form">
+								<table class="table table-responsive">
+									<thead class="thead-dark">
+										<tr>
+											<th scope="col">Id</th>
+											<th scope="col">Username</th>
+											<th scope="col">Full Name</th>
+											<th scope="col">Email</th>
+											<th scope="col">Phone Number</th>
+											<th scope="col">Address</th>
+											<th scope="col">EDIT</th>
+											<th scope="col">DELETE</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="user : ${userList}">
+											<th scope="row" th:utext="${user.id}"></th>
+											<td th:utext="${user.username}"></td>
+											<td th:utext="${user.fullName}"></td>
+											<td th:utext="${user.email}"></td>
+											<td th:utext="${user.phoneNumber}"></td>
+											<td th:utext="${user.address}"></td>
+											<td><a class="btn btn-success"
+												th:href="@{/admin/editprofile(username=${user.username})}">Edit</a></td>
+											<td><a class="btn btn-danger" th:href="@{/admin/deleteprofile(username=${user.username})}">Delete</a></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+                        
+                        <!-- Tag 2 -->
+                        <div class="tab-pane fade show" id="product" role="tabpanel" aria-labelledby="product-tab">
+                            <div class="heading">
+                            	<h3  class="admin-heading">Product List</h3>
+                            	<div class="search-bar">
+                            		<form th:action="@{/admin}">
+       								<input type="text" name="productKey" id="productKey" size="50" th:value="${productKey}" required />
+								    &nbsp;
+								    <input type="submit" value="Search" />
+								    &nbsp;
+ 									<input type="button" value="Clear" id="btnClear" onclick="window.location.href='/admin'" /> 
+ 									&nbsp;
+ 									<input type="button" value="Create New" id="btnCreate" onclick="window.location.href='/admin/createproduct'" />                    	                   	
+                            		</form>
+                            	</div>
+                            </div>                     	
+                            <div class="row admin-form">
+                                <table class="table table-responsive">
+									<thead class="thead-dark">
+										<tr>
+											<th scope="col">Id</th>
+											<th scope="col">Product Name</th>
+											<th scope="col">Product Detail</th>
+											<th scope="col">Image</th>
+											<th scope="col">Price</th>
+											<th scope="col">EDIT</th>
+											<th scope="col">DELETE</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="product : ${productList}">
+											<th scope="row" th:utext="${product.id}"></th>
+											<td th:utext="${product.productName}"></td>
+											<td th:utext="${product.productDetail}"></td>
+											<td><img class="image" th:src="@{(${product.linkImg})}" alt=""></td>
+											<td th:utext="${product.price}"></td>
+											<td><a class="btn btn-success"
+												th:href="@{/admin/editproduct(product=${product.productName})}">Edit</a></td>
+											<td><a class="btn btn-danger" th:href="@{/admin/deleteproduct(product=${product.productName})}">Delete</a></td>
+										</tr>
+									</tbody>
+								</table>
+                            </div>
+                        </div>
+                                                
+                         <!-- Tag 3 -->
+                        <div class="tab-pane fade show active" id="category" role="tabpanel" aria-labelledby="category-tab">
+                            <div class="heading">
+                            	<h3  class="admin-heading">Category</h3>
+                            	<div class="search-bar">
+                            	
+                            		<form th:action="@{/admin}">
+	       								<input type="text" name="categoryKey" id="categoryKey" size="50" th:value="${categoryKey}" required />
+									    &nbsp;
+									    <input type="submit" value="Search" />
+									    &nbsp;
+									    <input type="button" value="Clear" id="btnClear" onclick="window.location.href='/admin'" /> 
+									    &nbsp; 
+									    <input type="button" value="Create New" id="btnCreate" onclick="window.location.href='/admin/createCategory'" />                    	
+                            		</form>
+                            	</div>
+                            </div>   	
+                            <div class="row admin-form">
+                                <table class="table table-responsive categoryTable " id="categoryTable">
+									<thead class="thead-dark">
+										<tr>
+											<th scope="col">Id</th>
+											<th scope="col">Category Name</th>
+											<th scope="col">EDIT</th>
+											<th scope="col">DELETE</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="category : ${categoryList}">
+											<th scope="row" th:utext="${category.id}"></th>
+											<td th:utext="${category.cateName}"></td>
+											<td><a class="btn btn-success"
+												th:href="@{/admin/editcategory(category=${category.cateName})}">Edit</a></td>
+											<td><a class="btn btn-danger" th:href="@{/admin/deletecategory(category=${category.cateName})}">Delete</a></td>
+										</tr>
+									</tbody>
+								</table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Footer -->
+	    <footer>
+			<thblock th:include="_footer"></thblock>
+	    </footer>
+    <!-- Footer End -->
+
+    <script type="text/javascript">
+	    function clearSearch() {
+	        window.location = "[[@{/admin}]]";
+	    }
+	</script>
+	
+</body>
+<!-- JS here -->
+
+    <script th:src="@{/js/vendor/modernizr-3.5.0.min.js}"></script>
+    <!-- Jquery, Popper, Bootstrap -->
+    <script th:src="@{/js/vendor/jquery-1.12.4.min.js}"></script>
+    <script th:src="@{/js/popper.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <!-- Jquery Mobile Menu -->
+    <script th:src="@{/js/jquery.slicknav.min.js}"></script>
+
+    <!-- Jquery Slick , Owl-Carousel Plugins -->
+    <script th:src="@{/js/owl.carousel.min.js}"></script>
+    <script th:src="@{/js/slick.min.js}"></script>
+
+    <!-- One Page, Animated-HeadLin -->
+    <script th:src="@{/js/wow.min.js}"></script>
+    <script th:src="@{/js/animated.headline.js}"></script>
+    
+    <!-- Scroll up, nice-select, sticky -->
+    <script th:src="@{/js/jquery.scrollUp.min.js}"></script>
+    <script th:src="@{/js/jquery.nice-select.min.js}"></script>
+    <script th:src="@{/js/jquery.sticky.js}"></script>
+    <script th:src="@{/js/jquery.magnific-popup.js}"></script>
+
+    <!-- contact js -->
+    <script th:src="@{/js/contact.js}"></script>
+    <script th:src="@{/js/jquery.form.js}"></script>
+    <script th:src="@{/js/jquery.validate.min.js}"></script>
+    <script th:src="@{/js/mail-script.js}"></script>
+    <script th:src="@{/js/jquery.ajaxchimp.min.js}"></script>
+    
+    <!-- Jquery Plugins, main Jquery -->	
+    <script th:src="@{/js/plugins.js}"></script>
+    <script th:src="@{/js/main.js}"></script>
+    
+
+</html>
