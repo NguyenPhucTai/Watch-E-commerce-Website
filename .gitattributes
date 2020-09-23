@@ -1,2 +1,2 @@
-*.js linguist-detectable=false
-*.java linguist-detectable=true
+*.JavaScript linguist-detectable=false
+*.Java linguist-detectable=true
